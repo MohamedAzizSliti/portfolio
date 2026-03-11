@@ -6,7 +6,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Github, Mail, Linkedin, ArrowRight, Phone, MapPin, MessageCircle } from "lucide-react"
+import { Github, Mail, Linkedin, ArrowRight, Phone, MapPin, MessageCircle, Star, ExternalLink, Search, Lightbulb, PenTool, Code2, TestTube, Rocket, Quote } from "lucide-react"
 import { motion } from "framer-motion"
 import { PageTransition } from "@/components/page-transition"
 import { FadeUp, FadeDown, FadeLeft, FadeRight, ScaleIn } from "@/components/animate-in"
@@ -48,7 +48,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="hidden md:flex gap-6"
             >
-              {["About", "Experience", "Mobile Projects", "Web Projects", "Skills", "Contact"].map((item, index) => (
+              {["About", "Work Process", "Experience", "Mobile Projects", "Web Projects", "Skills", "Reviews", "Contact"].map((item, index) => (
                 <motion.div
                   key={item}
                   initial={{ opacity: 0, y: -10 }}
@@ -131,6 +131,110 @@ export default function Home() {
                     </p>
                   </FadeLeft>
                 </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Work Process Section */}
+          <section id="work-process" className="relative py-24 bg-gradient-to-br from-white via-blue-50/20 to-purple-50/20 dark:from-gray-900 dark:via-gray-800/30 dark:to-gray-900 overflow-hidden z-10">
+            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
+            <div className="container relative z-10">
+              <div className="text-center mb-16">
+                <FadeUp>
+                  <Badge className="px-4 py-2 text-sm bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0">
+                    How I Work
+                  </Badge>
+                </FadeUp>
+                <FadeUp delay={0.1}>
+                  <h2 className="text-3xl md:text-4xl font-bold mt-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+                    My Work Process
+                  </h2>
+                </FadeUp>
+                <FadeUp delay={0.2}>
+                  <p className="text-gray-600 dark:text-gray-300 mt-4 max-w-md mx-auto">
+                    A structured approach to deliver high-quality results on every project.
+                  </p>
+                </FadeUp>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {[
+                  {
+                    icon: Search,
+                    title: "Discovery",
+                    step: "01",
+                    description: "I start by understanding your vision, goals, and requirements. We discuss the project scope, target audience, and desired outcomes to build a solid foundation.",
+                    color: "from-blue-500 to-cyan-500",
+                    bgColor: "bg-blue-50 dark:bg-blue-950/30",
+                  },
+                  {
+                    icon: Lightbulb,
+                    title: "Planning & Strategy",
+                    step: "02",
+                    description: "I create a detailed roadmap with milestones, choose the right tech stack, and design the architecture to ensure scalability and performance.",
+                    color: "from-purple-500 to-pink-500",
+                    bgColor: "bg-purple-50 dark:bg-purple-950/30",
+                  },
+                  {
+                    icon: PenTool,
+                    title: "UI/UX Design",
+                    step: "03",
+                    description: "I design intuitive, beautiful interfaces with wireframes and prototypes, focusing on user experience and modern design principles.",
+                    color: "from-pink-500 to-rose-500",
+                    bgColor: "bg-pink-50 dark:bg-pink-950/30",
+                  },
+                  {
+                    icon: Code2,
+                    title: "Development",
+                    step: "04",
+                    description: "Clean, maintainable code is written following best practices. I keep you updated with regular progress reports and demo builds.",
+                    color: "from-green-500 to-emerald-500",
+                    bgColor: "bg-green-50 dark:bg-green-950/30",
+                  },
+                  {
+                    icon: TestTube,
+                    title: "Testing & QA",
+                    step: "05",
+                    description: "Rigorous testing across devices and platforms ensures everything works flawlessly. I fix bugs and optimize performance before launch.",
+                    color: "from-orange-500 to-amber-500",
+                    bgColor: "bg-orange-50 dark:bg-orange-950/30",
+                  },
+                  {
+                    icon: Rocket,
+                    title: "Launch & Support",
+                    step: "06",
+                    description: "I handle deployment, provide documentation, and offer ongoing support to ensure your project runs smoothly after launch.",
+                    color: "from-indigo-500 to-blue-500",
+                    bgColor: "bg-indigo-50 dark:bg-indigo-950/30",
+                  },
+                ].map((process, index) => (
+                  <motion.div
+                    key={process.title}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <Card className={`group h-full border-2 hover:border-blue-500/50 transition-all duration-300 ${process.bgColor} backdrop-blur-sm hover:shadow-2xl hover:shadow-blue-500/10 overflow-hidden relative`}>
+                      <div className="absolute top-4 right-4">
+                        <span className={`text-5xl font-black bg-gradient-to-r ${process.color} bg-clip-text text-transparent opacity-20 group-hover:opacity-40 transition-opacity`}>
+                          {process.step}
+                        </span>
+                      </div>
+                      <CardContent className="p-8 relative z-10">
+                        <motion.div
+                          className={`w-14 h-14 rounded-2xl bg-gradient-to-r ${process.color} flex items-center justify-center mb-6 shadow-lg`}
+                          whileHover={{ scale: 1.1, rotate: 5 }}
+                          transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                        >
+                          <process.icon className="h-7 w-7 text-white" />
+                        </motion.div>
+                        <h3 className="text-xl font-bold mb-3 dark:text-white">{process.title}</h3>
+                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{process.description}</p>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
               </div>
             </div>
           </section>
@@ -570,6 +674,167 @@ export default function Home() {
                   ))}
                 </StaggerContainer>
               </div>
+            </div>
+          </section>
+
+          {/* Fiverr Reviews Section */}
+          <section id="reviews" className="relative py-24 bg-gradient-to-br from-gray-50 via-purple-50/30 to-blue-50/30 dark:from-gray-900 dark:via-gray-800/50 dark:to-gray-900 overflow-hidden z-10">
+            <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-5" />
+            <div className="container relative z-10">
+              <div className="text-center mb-16">
+                <FadeUp>
+                  <Badge className="px-4 py-2 text-sm bg-gradient-to-r from-green-500 to-emerald-500 text-white border-0">
+                    Client Feedback
+                  </Badge>
+                </FadeUp>
+                <FadeUp delay={0.1}>
+                  <h2 className="text-3xl md:text-4xl font-bold mt-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 dark:from-blue-400 dark:via-purple-400 dark:to-pink-400 bg-clip-text text-transparent">
+                    What Clients Say
+                  </h2>
+                </FadeUp>
+                <FadeUp delay={0.2}>
+                  <p className="text-gray-600 dark:text-gray-300 mt-4 max-w-md mx-auto">
+                    Real reviews from satisfied clients on Fiverr.
+                  </p>
+                </FadeUp>
+              </div>
+
+              <FadeUp delay={0.15}>
+                <div className="flex flex-wrap items-center justify-center gap-6 mb-12">
+                  <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star key={i} className="h-5 w-5 text-yellow-400 fill-yellow-400" />
+                      ))}
+                    </div>
+                    <span className="text-2xl font-bold dark:text-white">5.0</span>
+                  </div>
+                  <div className="h-8 w-px bg-gray-300 dark:bg-gray-600" />
+                  <p className="text-gray-600 dark:text-gray-300 font-medium">4 Reviews on Fiverr</p>
+                  <div className="h-8 w-px bg-gray-300 dark:bg-gray-600" />
+                  <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span>Communication: <strong className="text-gray-800 dark:text-white">5.0</strong></span>
+                    <span>Quality: <strong className="text-gray-800 dark:text-white">5.0</strong></span>
+                    <span>Value: <strong className="text-gray-800 dark:text-white">5.0</strong></span>
+                  </div>
+                </div>
+              </FadeUp>
+
+              <div className="grid md:grid-cols-2 gap-8">
+                {[
+                  {
+                    name: "smativo",
+                    country: "Nigeria",
+                    rating: 5,
+                    review: "good work so far",
+                    project: "Cross-Platform Development",
+                    price: "$100-$200",
+                    duration: "4 weeks",
+                    date: "2025",
+                  },
+                  {
+                    name: "fliporphil",
+                    country: "United States",
+                    rating: 5,
+                    review: "I couldn't find anyone to do what Mohamed was able to simply understand. The delivery was alot faster than I expected. I'll be coming back to bring more work to Mohamed for sure!! Highly Recommend!!!",
+                    project: "Cross-Platform Development",
+                    price: "Up to $50",
+                    duration: "1 day",
+                    date: "2025",
+                  },
+                  {
+                    name: "reservet",
+                    country: "India",
+                    rating: 5,
+                    review: "Keep up the good work. He is someone who understands his clients very well and is passionate about his work. I would suggest other's also to give him a chance if they need something to be made in quick time.",
+                    project: "Cross-Platform Development",
+                    isRepeatClient: true,
+                    date: "2022",
+                  },
+                  {
+                    name: "reservet",
+                    country: "India",
+                    rating: 5,
+                    review: "He works really fast and has supplied exactly what I wanted without any troubles caused. He understands his customer's need and also provides services at a decent rate. Communication wise also he is great and is reliable for his work ethic",
+                    project: "Cross-Platform Development",
+                    isRepeatClient: true,
+                    date: "2022",
+                  },
+                ].map((review, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <Card className="group h-full border-2 hover:border-green-500/50 transition-all duration-300 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm hover:shadow-2xl hover:shadow-green-500/10 relative overflow-hidden">
+                      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-emerald-500" />
+                      <CardContent className="p-8">
+                        <div className="flex items-start justify-between mb-4">
+                          <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center text-white font-bold text-lg">
+                              {review.name.charAt(0).toUpperCase()}
+                            </div>
+                            <div>
+                              <h4 className="font-bold dark:text-white">{review.name}</h4>
+                              <div className="flex items-center gap-2">
+                                <p className="text-sm text-gray-500 dark:text-gray-400">{review.country}</p>
+                                {review.isRepeatClient && (
+                                  <Badge className="text-[10px] px-1.5 py-0 bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 border-0">
+                                    Repeat Client
+                                  </Badge>
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-1">
+                            {Array.from({ length: 5 }).map((_, i) => (
+                              <Star
+                                key={i}
+                                className={`h-4 w-4 ${i < review.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"}`}
+                              />
+                            ))}
+                          </div>
+                        </div>
+                        <Quote className="h-6 w-6 text-green-500/30 mb-2" />
+                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6 italic">
+                          &ldquo;{review.review}&rdquo;
+                        </p>
+                        <div className="flex items-center justify-between pt-4 border-t border-gray-100 dark:border-gray-700">
+                          <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">{review.project}</p>
+                          <div className="flex items-center gap-3 text-xs text-gray-500 dark:text-gray-400">
+                            {review.price && <span>{review.price}</span>}
+                            {review.duration && (
+                              <>
+                                <span className="w-1 h-1 bg-gray-400 rounded-full" />
+                                <span>{review.duration}</span>
+                              </>
+                            )}
+                            <span className="w-1 h-1 bg-gray-400 rounded-full" />
+                            <span>{review.date}</span>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                ))}
+              </div>
+
+              <FadeUp delay={0.3}>
+                <div className="text-center mt-12">
+                  <Link
+                    href="https://www.fiverr.com/chichou99?public_mode=true"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white px-8 py-3 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+                      <ExternalLink className="h-5 w-5 mr-2" />
+                      View All Reviews on Fiverr
+                    </Button>
+                  </Link>
+                </div>
+              </FadeUp>
             </div>
           </section>
 
