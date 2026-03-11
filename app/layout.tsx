@@ -6,16 +6,16 @@ import type { PropsWithChildren } from "react"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
-  title: "Mohamed Aziz Sliti - Flutter & Mobile Developer",
-  description: "Portfolio of Mohamed Aziz Sliti, a Flutter and Mobile Developer based in Tunisia",
+  title: "Mohamed Aziz Sliti - Full Stack Developer",
+  description: "Portfolio of Mohamed Aziz Sliti, a Full Stack Developer specializing in Mobile (Flutter) and Web (React, Next.js) development based in Tunisia",
     generator: 'v0.dev'
 }
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>
       </body>
