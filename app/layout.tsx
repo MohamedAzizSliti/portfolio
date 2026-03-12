@@ -8,7 +8,6 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata = {
   title: "Mohamed Aziz Sliti - Full Stack Developer",
   description: "Portfolio of Mohamed Aziz Sliti, a Full Stack Developer specializing in Mobile (Flutter) and Web (React, Next.js) development based in Tunisia",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({ children }: PropsWithChildren) {
