@@ -61,7 +61,9 @@ export function AnimateIn({
   )
 }
 
-export function FadeIn({ children, className, delay = 0, duration = 0.5, once = true }) {
+type FadeProps = Pick<AnimateInProps, "children" | "className" | "delay" | "duration" | "once">
+
+export function FadeIn({ children, className, delay = 0, duration = 0.5, once = true }: FadeProps) {
   return (
     <AnimateIn
       from={{ opacity: 0 }}
@@ -76,7 +78,7 @@ export function FadeIn({ children, className, delay = 0, duration = 0.5, once = 
   )
 }
 
-export function FadeUp({ children, className, delay = 0, duration = 0.5, once = true }) {
+export function FadeUp({ children, className, delay = 0, duration = 0.5, once = true }: FadeProps) {
   return (
     <AnimateIn
       from={{ opacity: 0, y: 20 }}
@@ -91,7 +93,7 @@ export function FadeUp({ children, className, delay = 0, duration = 0.5, once = 
   )
 }
 
-export function FadeDown({ children, className, delay = 0, duration = 0.5, once = true }) {
+export function FadeDown({ children, className, delay = 0, duration = 0.5, once = true }: FadeProps) {
   return (
     <AnimateIn
       from={{ opacity: 0, y: -20 }}
@@ -106,7 +108,7 @@ export function FadeDown({ children, className, delay = 0, duration = 0.5, once 
   )
 }
 
-export function FadeRight({ children, className, delay = 0, duration = 0.5, once = true }) {
+export function FadeRight({ children, className, delay = 0, duration = 0.5, once = true }: FadeProps) {
   return (
     <AnimateIn
       from={{ opacity: 0, x: -20 }}
@@ -121,7 +123,7 @@ export function FadeRight({ children, className, delay = 0, duration = 0.5, once
   )
 }
 
-export function FadeLeft({ children, className, delay = 0, duration = 0.5, once = true }) {
+export function FadeLeft({ children, className, delay = 0, duration = 0.5, once = true }: FadeProps) {
   return (
     <AnimateIn
       from={{ opacity: 0, x: 20 }}
@@ -136,7 +138,7 @@ export function FadeLeft({ children, className, delay = 0, duration = 0.5, once 
   )
 }
 
-export function ScaleIn({ children, className, delay = 0, duration = 0.5, once = true }) {
+export function ScaleIn({ children, className, delay = 0, duration = 0.5, once = true }: FadeProps) {
   return (
     <AnimateIn
       from={{ opacity: 0, scale: 0.9 }}

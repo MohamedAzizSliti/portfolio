@@ -161,7 +161,7 @@ export function createAutoReplyTemplate({
         
         <div class="social-links">
           <a href="https://github.com/MohamedAzizSliti">GitHub</a> | 
-          <a href="https://www.linkedin.com/in/mohamedazizsliti/">LinkedIn</a>
+          <a href="https://www.linkedin.com/in/mohamed-aziz-sliti-a511b31ba/">LinkedIn</a>
         </div>
       </div>
       <div class="footer">

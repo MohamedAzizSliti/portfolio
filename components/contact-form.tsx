@@ -1,150 +1,78 @@
 "use client"
 
-import type React from "react"
+import { useState, type FormEvent } from "react"
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
-import { Loader2 } from "lucide-react"
+type Status = "idle" | "loading" | "success" | "error"
 
 export function ContactForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  })
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
+  const [status, setStatus] = useState<Status>("idle")
+  const [error, setError] = useState("Something went wrong. Email me directly.")
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const form = event.currentTarget
+    const data = Object.fromEntries(new FormData(form).entries())
     setStatus("loading")
 
     try {
       const response = await fetch("/api/send-email", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
       })
-
-      if (response.ok) {
-        setStatus("success")
-        setFormData({ name: "", email: "", subject: "", message: "" })
-        setTimeout(() => setStatus("idle"), 5000)
-      } else {
+      if (!response.ok) {
+        const payload = (await response.json().catch(() => null)) as { error?: string } | null
+        setError(payload?.error || "Something went wrong. Email me directly.")
         setStatus("error")
-        setTimeout(() => setStatus("idle"), 5000)
+        return
       }
-    } catch (error) {
+      form.reset()
+      setStatus("success")
+    } catch {
+      setError("Something went wrong. Email me directly.")
       setStatus("error")
-      setTimeout(() => setStatus("idle"), 5000)
     }
   }
 
   return (
-    <form className="space-y-4" onSubmit={handleSubmit}>
-      <div className="grid md:grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <label htmlFor="name" className="text-sm font-medium">
+    <form className="space-y-4" onSubmit={onSubmit} noValidate={false}>
+      <div className="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label htmlFor="name" className="kicker">
             Name
           </label>
-          <motion.input
-            whileFocus={{ scale: 1.01 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            id="name"
-            name="name"
-            type="text"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition"
-            placeholder="Your name"
-            required
-          />
+          <input id="name" name="name" required autoComplete="name" className="field mt-2" placeholder="Your name" />
         </div>
-        <div className="space-y-2">
-          <label htmlFor="email" className="text-sm font-medium">
+        <div>
+          <label htmlFor="email" className="kicker">
             Email
           </label>
-          <motion.input
-            whileFocus={{ scale: 1.01 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            id="email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition"
-            placeholder="Your email"
-            required
-          />
+          <input id="email" name="email" type="email" required autoComplete="email" className="field mt-2" placeholder="you@company.com" />
         </div>
       </div>
-      <div className="space-y-2">
-        <label htmlFor="subject" className="text-sm font-medium">
+      <div>
+        <label htmlFor="subject" className="kicker">
           Subject
         </label>
-        <motion.input
-          whileFocus={{ scale: 1.01 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          id="subject"
-          name="subject"
-          type="text"
-          value={formData.subject}
-          onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition"
-          placeholder="Subject"
-          required
-        />
+        <input id="subject" name="subject" required className="field mt-2" placeholder="What are you building?" />
       </div>
-      <div className="space-y-2">
-        <label htmlFor="message" className="text-sm font-medium">
+      <div>
+        <label htmlFor="message" className="kicker">
           Message
         </label>
-        <motion.textarea
-          whileFocus={{ scale: 1.01 }}
-          transition={{ type: "spring", stiffness: 400, damping: 10 }}
-          id="message"
-          name="message"
-          rows={5}
-          value={formData.message}
-          onChange={handleChange}
-          className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition resize-none"
-          placeholder="Your message"
-          required
-        ></motion.textarea>
+        <textarea id="message" name="message" required rows={6} className="field mt-2 resize-y" placeholder="The idea, the timeline, the constraint." />
       </div>
-      <motion.div
-        whileHover={{ scale: 1.03 }}
-        whileTap={{ scale: 0.97 }}
-        transition={{ type: "spring", stiffness: 400, damping: 10 }}
-      >
-        <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700" disabled={status === "loading"}>
-          {status === "loading" ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Sending...
-            </>
-          ) : status === "success" ? (
-            "Message Sent!"
-          ) : status === "error" ? (
-            "Failed to Send - Try Again"
-          ) : (
-            "Send Message"
-          )}
-        </Button>
-      </motion.div>
-
-      {status === "success" && <p className="text-green-600 text-center">Your message has been sent successfully!</p>}
-      {status === "error" && (
-        <p className="text-red-600 text-center">There was an error sending your message. Please try again.</p>
-      )}
+      <button type="submit" className="btn-primary w-full sm:w-auto" disabled={status === "loading"}>
+        {status === "loading" ? "Sending" : "Start a project"}
+      </button>
+      <p className="min-h-5 text-sm" role="status" aria-live="polite">
+        {status === "success" ? <span className="text-emerald-300">Message sent. I&apos;ll reply by email.</span> : null}
+        {status === "error" ? <span className="text-red-300">{error}</span> : null}
+      </p>
     </form>
   )
 }

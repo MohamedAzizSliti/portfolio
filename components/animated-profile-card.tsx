@@ -38,9 +38,10 @@ export function AnimatedProfileCard() {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <Image
-                src="/about-image.png"
+                src="/about-image.webp"
                 alt="Mohamed Aziz Sliti"
                 fill
+                sizes="128px"
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
@@ -62,7 +63,7 @@ export function AnimatedProfileCard() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
               >
-                Full Stack Developer
+                Flutter & Full-Stack Developer
               </motion.p>
               <Badge className="bg-white/20 text-white border-white/30 backdrop-blur-sm">
                 Available for Hire
@@ -123,7 +124,7 @@ export function AnimatedProfileCard() {
               </div>
               <div>
                 <p className="text-xs text-gray-500 dark:text-gray-400">Experience</p>
-                <p className="font-medium text-gray-900 dark:text-gray-100">2+ Years</p>
+                <p className="font-medium text-gray-900 dark:text-gray-100">3+ Years</p>
               </div>
             </motion.div>
           </motion.div>

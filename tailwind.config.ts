@@ -19,7 +19,23 @@ const config = {
       },
     },
     extend: {
+      transitionTimingFunction: {
+        draw: "cubic-bezier(0.22, 1, 0.36, 1)",
+      },
+      fontFamily: {
+        sans: ["var(--font-geist)", "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
+      },
       colors: {
+        ink: "#000000",
+        panel: "#181818",
+        elevated: "#1F1F1F",
+        line: "#272727",
+        azure: "#FFFFFF",
+        electric: "#FFFFFF",
+        violet: "#9B9B9B",
+        mist: "#9B9B9B",
+        paper: "#FFFFFF",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

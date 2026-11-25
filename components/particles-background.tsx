@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useRef } from "react"
-import { motion } from "framer-motion"
 
 interface Particle {
   x: number
@@ -15,11 +14,15 @@ interface Particle {
 export function ParticlesBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const particlesRef = useRef<Particle[]>([])
-  const animationFrameRef = useRef<number>()
+  const animationFrameRef = useRef<number | undefined>(undefined)
 
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
+
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const isNarrow = window.matchMedia("(max-width: 768px)").matches
+    if (prefersReducedMotion || isNarrow) return
 
     const ctx = canvas.getContext("2d")
     if (!ctx) return
@@ -32,53 +35,57 @@ export function ParticlesBackground() {
     resizeCanvas()
     window.addEventListener("resize", resizeCanvas)
 
-    // Create particles
-    const particleCount = 50
+    const particleCount = 22
     particlesRef.current = Array.from({ length: particleCount }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       size: Math.random() * 2 + 1,
-      speedX: (Math.random() - 0.5) * 0.5,
-      speedY: (Math.random() - 0.5) * 0.5,
-      opacity: Math.random() * 0.5 + 0.2,
+      speedX: (Math.random() - 0.5) * 0.4,
+      speedY: (Math.random() - 0.5) * 0.4,
+      opacity: Math.random() * 0.4 + 0.15,
     }))
 
+    let running = true
+    const onVisibility = () => {
+      running = document.visibilityState === "visible"
+    }
+    document.addEventListener("visibilitychange", onVisibility)
+
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      if (running) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-      particlesRef.current.forEach((particle, i) => {
-        // Update position
-        particle.x += particle.speedX
-        particle.y += particle.speedY
+        particlesRef.current.forEach((particle, i) => {
+          particle.x += particle.speedX
+          particle.y += particle.speedY
 
-        // Wrap around edges
-        if (particle.x < 0) particle.x = canvas.width
-        if (particle.x > canvas.width) particle.x = 0
-        if (particle.y < 0) particle.y = canvas.height
-        if (particle.y > canvas.height) particle.y = 0
+          if (particle.x < 0) particle.x = canvas.width
+          if (particle.x > canvas.width) particle.x = 0
+          if (particle.y < 0) particle.y = canvas.height
+          if (particle.y > canvas.height) particle.y = 0
 
-        // Draw particle
-        ctx.beginPath()
-        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(59, 130, 246, ${particle.opacity})`
-        ctx.fill()
+          ctx.beginPath()
+          ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
+          ctx.fillStyle = `rgba(59, 130, 246, ${particle.opacity})`
+          ctx.fill()
 
-        // Draw connections
-        particlesRef.current.slice(i + 1).forEach((otherParticle) => {
-          const dx = particle.x - otherParticle.x
-          const dy = particle.y - otherParticle.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
+          for (let j = i + 1; j < particlesRef.current.length; j++) {
+            const otherParticle = particlesRef.current[j]
+            const dx = particle.x - otherParticle.x
+            const dy = particle.y - otherParticle.y
+            const distance = Math.sqrt(dx * dx + dy * dy)
 
-          if (distance < 150) {
-            ctx.beginPath()
-            ctx.moveTo(particle.x, particle.y)
-            ctx.lineTo(otherParticle.x, otherParticle.y)
-            ctx.strokeStyle = `rgba(59, 130, 246, ${0.1 * (1 - distance / 150)})`
-            ctx.lineWidth = 0.5
-            ctx.stroke()
+            if (distance < 110) {
+              ctx.beginPath()
+              ctx.moveTo(particle.x, particle.y)
+              ctx.lineTo(otherParticle.x, otherParticle.y)
+              ctx.strokeStyle = `rgba(59, 130, 246, ${0.08 * (1 - distance / 110)})`
+              ctx.lineWidth = 0.5
+              ctx.stroke()
+            }
           }
         })
-      })
+      }
 
       animationFrameRef.current = requestAnimationFrame(animate)
     }
@@ -87,6 +94,7 @@ export function ParticlesBackground() {
 
     return () => {
       window.removeEventListener("resize", resizeCanvas)
+      document.removeEventListener("visibilitychange", onVisibility)
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current)
       }
@@ -96,8 +104,9 @@ export function ParticlesBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none"
+      className="fixed inset-0 pointer-events-none hidden md:block"
       style={{ zIndex: 0 }}
+      aria-hidden
     />
   )
 }

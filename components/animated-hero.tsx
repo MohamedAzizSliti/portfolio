@@ -6,14 +6,10 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowRight, Github, Mail, Linkedin } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { ParticlesBackground } from "./particles-background"
-import { GradientBackground } from "./gradient-background"
 
 export function AnimatedHero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      <GradientBackground />
-      <ParticlesBackground />
       <div className="container relative z-10 py-24 md:py-32 flex flex-col md:flex-row items-center gap-12">
         <div className="flex-1 space-y-8">
           <motion.div
@@ -22,7 +18,7 @@ export function AnimatedHero() {
             transition={{ duration: 0.6 }}
           >
             <Badge className="px-4 py-2 text-sm bg-gradient-to-r from-blue-500 to-purple-500 text-white border-0 hover:from-blue-600 hover:to-purple-600">
-              Full Stack Developer
+              Flutter & Full-Stack Developer
             </Badge>
           </motion.div>
 
@@ -36,7 +32,9 @@ export function AnimatedHero() {
             <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
               Mohamed Aziz Sliti
             </span>
-            <span className="block text-gray-800 dark:text-gray-200">Full Stack Developer</span>
+            <span className="block text-gray-800 dark:text-gray-200 text-3xl md:text-4xl mt-2">
+              Mobile, backend automation &amp; AI — as one stack
+            </span>
           </motion.h1>
 
           <motion.p
@@ -45,7 +43,7 @@ export function AnimatedHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            I transform ideas into powerful digital experiences, building seamless applications that users love. From concept to deployment, I bring your vision to life.
+            3+ years shipping Flutter apps wired to real backends — REST, Supabase, n8n workflows, and OpenAI where it earns its place. Same connected approach on ExpressKilo, Wave Clinique, and client work.
           </motion.p>
 
           <motion.div
@@ -59,7 +57,7 @@ export function AnimatedHero() {
               className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
               asChild
             >
-              <Link href="#mobile-projects">
+              <Link href="#projects">
                 View Projects <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
@@ -89,7 +87,7 @@ export function AnimatedHero() {
               <span className="sr-only">GitHub</span>
             </motion.a>
             <motion.a
-              href="https://www.linkedin.com/in/mohamedazizsliti/"
+              href="https://www.linkedin.com/in/mohamed-aziz-sliti-a511b31ba/"
               className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               whileHover={{ scale: 1.2, rotate: -5 }}
               whileTap={{ scale: 0.9 }}
@@ -129,9 +127,10 @@ export function AnimatedHero() {
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-20 blur-3xl animate-pulse" />
             <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-gray-700 shadow-2xl">
               <Image
-                src="/about-image.png"
+                src="/about-image.webp"
                 alt="Mohamed Aziz Sliti"
                 fill
+                sizes="(max-width: 768px) 288px, 384px"
                 className="object-cover"
                 priority
               />
