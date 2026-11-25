@@ -7,6 +7,7 @@ import { Hero } from "@/components/sections/hero"
 import { HowItWorks } from "@/components/sections/how-it-works"
 import { Philosophy } from "@/components/sections/philosophy"
 import { Projects } from "@/components/sections/projects"
+import { Reviews } from "@/components/sections/reviews"
 import { UseCases } from "@/components/sections/use-cases"
 import { Services } from "@/components/sections/services"
 import { Tagline } from "@/components/sections/tagline"
@@ -25,6 +26,7 @@ export default function HomePage() {
       <Expertise />
       <Services />
       <Experience />
+      <Reviews />
       <Faq />
       <Philosophy />
       <Contact />

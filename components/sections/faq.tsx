@@ -21,7 +21,7 @@ const questions = [
   },
   {
     q: "Will you show client numbers?",
-    a: "No. This site does not publish revenue, user counts, or testimonials that were not supplied.",
+    a: "No invented numbers. The Fiverr section is the four reviews clients left on that profile.",
   },
 ]
 
