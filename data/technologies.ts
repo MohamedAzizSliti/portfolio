@@ -94,7 +94,7 @@ export const technologyGroups: TechnologyGroup[] = [
       },
       {
         name: "Firebase",
-        note: "Auth and data for Zaghouan Delivery.",
+        note: "Auth and data for Allô Coursier Zaghouan.",
       },
       {
         name: "MongoDB",

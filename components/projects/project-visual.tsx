@@ -9,7 +9,7 @@ const motifs: Record<string, { accent: string; caption: string }> = {
   studenty: { accent: "#38BDF8", caption: "Student or club. One feed." },
   "voice-to-work": { accent: "#C4B5FD", caption: "Speech, then a report." },
   "al-mindhar": { accent: "#93C5FD", caption: "Listing, profile, booking." },
-  "zaghouan-delivery": { accent: "#60A5FA", caption: "Four jobs, one order." },
+  "zaghouan-delivery": { accent: "#8B5E3C", caption: "Office board. Courier day." },
   domotika: { accent: "#22C55E", caption: "Four modes. One panel." },
 }
 
@@ -43,6 +43,11 @@ const references: Record<string, { src: string; alt: string; label: string; wide
   domotika: {
     src: "/projects/domotika/01-arm.png",
     alt: "Domotika alarm panel with Arm selected",
+    label: "App screen",
+  },
+  "zaghouan-delivery": {
+    src: "/projects/allo-coursier/03-dashboard.png",
+    alt: "Allô Coursier Zaghouan office dashboard",
     label: "App screen",
   },
 }

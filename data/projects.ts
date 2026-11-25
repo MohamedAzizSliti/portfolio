@@ -387,39 +387,40 @@ export const projects: Project[] = [
   },
   {
     slug: "zaghouan-delivery",
-    name: "Zaghouan Delivery",
+    name: "Allô Coursier Zaghouan",
     category: "Local delivery",
     timeframe: "Not dated publicly",
     status: "Documented product",
     summary:
-      "A delivery app with separate jobs for clients, couriers, scanning agents, and an admin view.",
+      "A Flutter delivery app for Zaghouan: an office board, a courier day, and a QR scan on the same order.",
     description:
-      "Zaghouan Delivery is a Flutter and Firebase application with more than one kind of user. Clients place orders. Delivery personnel carry them. Agents scan QR codes and generate PDF invoices. An admin view surfaces operational statistics. I am not publishing the numbers that view contains.",
+      "Allô Coursier Zaghouan is the local delivery app. The office opens on a board, then follows orders, builds a circuit by area, and reads notifications. A courier opens a different home: assigned parcels, the day's courses, and a QR scanner. Sign-in is in French or Arabic. The stack recorded for it is Flutter and Firebase. Counts on these screens are what that build showed, not a published result. The mark on the splash says 2020. That is not an employment date.",
     contribution:
-      "Flutter client work across those roles, with Firebase behind the app.",
+      "Flutter client work across the office and the courier, with Firebase behind the app.",
     problem:
-      "A local delivery operation is several jobs sharing one order. A single customer app does not cover the person scanning the parcel.",
+      "A local delivery operation is several jobs sharing one order. The office and the courier cannot share one home screen.",
     role: "Flutter developer on a multi-role delivery product.",
     challenge:
-      "Each role needs a short path. Sharing one navigation tree across client, courier, agent, and admin makes every path longer.",
+      "The office needs the board, the circuit, and the order list. The courier needs today's courses and a scan. One navigation tree makes both paths longer.",
     solution:
-      "Role-specific Flutter flows on Firebase: ordering, delivery, QR scan to a PDF invoice, and an admin view for statistics.",
+      "Two Flutter shells on Firebase. The office uses Tableau de bord, Circuit, Colis, and Notifications. The courier uses Accueil, Courses, Scanner, and Notifications.",
     technologies: ["Flutter", "Firebase"],
     features: [
-      "Client ordering",
-      "Courier flow",
+      "Office dashboard",
+      "Order tracking",
+      "Delivery circuits",
+      "Courier courses",
       "QR scanning",
-      "PDF invoices",
-      "Admin statistics",
+      "Notifications",
     ],
     architecture: [
-      "Flutter clients separated by role",
+      "Flutter office shell",
+      "Flutter courier shell",
       "Firebase for auth and data",
-      "QR scan leading to a generated invoice PDF",
-      "An admin view over operational data",
+      "QR scan to update a parcel",
     ],
     statusDetail:
-      "Documented product. Dates were not recorded on the previous site, so none are invented here. No public demo is linked.",
+      "Documented product. No public start or end date is recorded, and no public demo is linked. The pictures are the clear screens: splash, sign-in, the office board, orders, a circuit, notifications, the courier home, courses, and the scanner. Empty states, repeats, and the contact lists were left out.",
     group: "earlier",
   },
   {
